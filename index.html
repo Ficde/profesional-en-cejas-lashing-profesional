@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espacio de Repaso - MOD 3 LASHING PROFESIONAL Y EXTENSIONES DE PESTAÑAS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ficde-azul-dark: #134252;
+            --ficde-azul-light: #2c5c6e;
+            --ficde-naranja: #e68161;
+            --ficde-naranja-hover: #ff9f85;
+            --tarjeta-bg: #f0f4f5;
+            --input-bg: #e2e8eb;
+            --texto-principal: #0f2d38;
+            --texto-secundario: #4a636e;
+            --verde-exito: #2e7d32;
+            --verde-bg: #c8e6c9;
+            --rojo-error: #c62828;
+            --naranja-bg: #ffe0b2;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--ficde-azul-dark) 0%, #0a252e 100%);
+            min-height: 100vh;
+            color: var(--texto-principal);
+            padding: 20px;
+            background-attachment: fixed;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-img { height: 50px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+
+        .module-tag {
+            background: var(--ficde-naranja);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .welcome-card {
+            background: var(--tarjeta-bg);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            border-bottom: 6px solid var(--ficde-naranja);
+            margin-bottom: 30px;
+        }
+
+        .welcome-title {
+            color: var(--ficde-azul-dark);
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .fede-avatar-large {
+            width: 140px; height: 140px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: var(--ficde-naranja);
+            padding: 5px;
+            box-shadow: 0 10px 25px rgba(230, 129, 97, 0.5);
+            cursor: pointer;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+
+        .fede-avatar-large:hover { transform: scale(1.1); }
+
+        .fede-avatar-large img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid white;
+        }
+
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .block-card {
+            background: var(--tarjeta-bg);
+            padding: 30px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid transparent;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .block-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--ficde-naranja);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .block-icon {
+            font-size: 3rem; margin-bottom: 15px;
+            background: rgba(19, 66, 82, 0.1);
+            width: 70px; height: 70px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; color: var(--ficde-azul-dark);
+        }
+
+        .block-title { color: var(--ficde-azul-dark); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+
+        .block-desc { 
+            color: var(--texto-secundario); 
+            font-size: 0.9rem; 
+            line-height: 1.5; 
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .activity-screen {
+            display: none;
+            grid-template-columns: 280px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .activity-screen.active { display: grid; }
+
+        .tutor-sidebar {
+            background: var(--ficde-azul-light);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            position: sticky; top: 20px;
+        }
+
+        .tutor-bubble {
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: var(--ficde-azul-dark);
+            margin-top: 20px;
+            position: relative;
+            text-align: left;
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .tutor-bubble::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            border-width: 0 10px 10px;
+            border-style: solid;
+            border-color: transparent transparent rgba(255,255,255,0.95);
+            transform: translateX(-50%);
+        }
+
+        .activity-content {
+            background: var(--tarjeta-bg);
+            padding: 40px;
+            border-radius: 16px;
+            min-height: 500px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .act-badge {
+            background: var(--ficde-naranja);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .act-title { font-size: 1.8rem; color: var(--ficde-azul-dark); margin: 15px 0; font-weight: 800; }
+
+        .act-instruction { 
+            font-size: 1.1rem; 
+            color: var(--texto-secundario); 
+            margin-bottom: 30px; 
+            word-wrap: break-word;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .student-input {
+            width: 100%;
+            height: 150px;
+            padding: 20px;
+            background: var(--input-bg);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: var(--ficde-azul-dark);
+            transition: all 0.3s;
+        }
+
+        .student-input:focus { background: white; border-color: var(--ficde-naranja); outline: none; }
+
+        .fill-input {
+            border: none;
+            border-bottom: 2px solid var(--ficde-naranja);
+            background: transparent;
+            font-weight: 700;
+            color: var(--ficde-azul-dark);
+            text-align: center;
+            width: 150px;
+            font-size: 1.1rem;
+        }
+
+        .btn-action {
+            width: 100%;
+            padding: 18px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            background: linear-gradient(90deg, var(--ficde-naranja), #ff9f85);
+            color: white;
+            box-shadow: 0 6px 20px rgba(230, 129, 97, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .btn-action:hover { transform: translateY(-3px); }
+
+        .btn-back {
+            background: transparent;
+            color: var(--texto-secundario);
+            box-shadow: none;
+            border: 2px solid #ccc;
+            margin-top: 15px;
+        }
+
+        .btn-back:hover { background: #e0e0e0; color: var(--ficde-azul-dark); }
+
+        .traffic-row, .checklist-item {
+            background: white;
+            margin-bottom: 12px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .traffic-row:hover, .checklist-item:hover { border-color: var(--ficde-naranja); transform: translateX(5px); }
+
+        .traffic-btn {
+            width: 35px; height: 35px;
+            border-radius: 50%; border: 2px solid #ddd;
+            cursor: pointer;
+            opacity: 0.3;
+        }
+
+        .traffic-btn.active { opacity: 1; transform: scale(1.2); border-color: var(--ficde-azul-dark); }
+
+        .bg-green { background: #4CAF50; }
+
+        .bg-yellow { background: #FFC107; }
+
+        .bg-red { background: #f44336; }
+
+        .check-box {
+            width: 24px; height: 24px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .checklist-item.selected { border-color: var(--ficde-naranja); background: #fff5f0; }
+
+        .checklist-item.selected .check-box { background: var(--ficde-naranja); border-color: var(--ficde-naranja); color: white; }
+
+        .feedback-area {
+            margin-top: 30px;
+            padding: 25px;
+            border-radius: 12px;
+            display: none;
+            animation: slideUp 0.4s;
+        }
+
+        .feedback-success { background: var(--verde-bg); color: #1b5e20; border-left: 6px solid var(--verde-exito); }
+
+        .feedback-retry { background: var(--naranja-bg); color: #bf360c; border-left: 6px solid #ef6c00; }
+
+        .feedback-fail { background: #cfd8dc; color: #37474f; border-left: 6px solid #455a64; }
+
+        #musicToggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--ficde-naranja);
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .activity-screen { grid-template-columns: 1fr; }
+            .tutor-sidebar { display: flex; align-items: center; gap: 20px; }
+            .fede-avatar-large { width: 80px; height: 80px; }
+            .tutor-bubble::after { display: none; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- AUDIOS MP3 -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="chill-study-desk-focus-concentration-lofi-451180.mp3" type="audio/mpeg">
+    </audio>
+
+    <audio id="saludoInicial" preload="auto" src="saludoinicial.mp3"></audio>
+    <audio id="mensaje1Ejercicios" preload="auto" src="mensaje1ejercicios.mp3"></audio>
+    <audio id="mensaje2Ejercicios" preload="auto" src="mensaje2ejercicios.mp3"></audio>
+    <audio id="mensaje3Ejercicios" preload="auto" src="mensaje3ejercicios.mp3"></audio>
+    <audio id="mensaje4Ejercicios" preload="auto" src="mensaje4ejercicios.mp3"></audio>
+    <audio id="respuestaCorrecta" preload="auto" src="respuestacorrecta.mp3"></audio>
+    <audio id="primerError" preload="auto" src="primererror.mp3"></audio>
+    <audio id="segundoError" preload="auto" src="segundoerror.mp3"></audio>
+    <audio id="loLograste" preload="auto" src="lolograste.mp3"></audio>
+
+    <audio id="hoverSound" preload="auto" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.m4a"></audio>
+    <audio id="clickSound" preload="auto" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.m4a"></audio>
+    <audio id="successSound" preload="auto" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.m4a"></audio>
+
+    <button id="musicToggle" onclick="toggleMusic()">🔇</button>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="logo.png" alt="FICDE" class="logo-img" onerror="this.style.display='none'; document.getElementById('altLogo').style.display='block'">
+                <h2 id="altLogo" style="display:none; color:white; font-weight:800;">FICDE</h2>
+            </div>
+            <div class="module-tag">Módulo: 3 LASHING PROFESIONAL Y EXTENSIONES DE PESTAÑAS</div>
+        </header>
+
+        <div id="selectionScreen">
+            <div class="welcome-card">
+                <div class="fede-avatar-large" onclick="playAudio('saludoInicial')">
+                    <img src="personaje.gif" alt="Fede">
+                </div>
+                <h1 class="welcome-title">Espacio de Repaso Interactivo</h1>
+                <p style="color: var(--texto-secundario); font-size: 1.1rem;">Donde el conocimiento se convierte en acción</p>
+            </div>
+
+            <div class="blocks-grid">
+                <div class="block-card" onclick="startModule('sintesis')">
+                    <div class="block-icon">🧠</div>
+                    <div class="block-title">Síntesis</div>
+                    <div class="block-desc">bioseguridad e higiene ocular, anatomía del ojo y pestañas, ciclo de crecimiento, instrumental y productos, tipos de extensiones, técnicas de aplicación y volumen, mapping y planificación.</div>
+                </div>
+
+                <div class="block-card" onclick="startModule('analisis')">
+                    <div class="block-icon">🔍</div>
+                    <div class="block-title">Análisis Crítico</div>
+                    <div class="block-desc">errores de aplicación y aislamiento, exceso de carga, riesgos oculares, manejo del adhesivo, cuidados de retención, retiro seguro y protocolo de remoción profesional.</div>
+                </div>
+
+                <div class="block-card" onclick="startModule('escenarios')">
+                    <div class="block-icon">🎬</div>
+                    <div class="block-title">Escenarios</div>
+                    <div class="block-desc">atención según sensibilidad y características oculares, manejo de molestias y contraindicaciones, adaptación del diseño, mantenimiento, cuidados posteriores y retiro seguro.</div>
+                </div>
+
+                <div class="block-card" onclick="startModule('practica')">
+                    <div class="block-icon">⚡</div>
+                    <div class="block-title">Práctica</div>
+                    <div class="block-desc">higiene y aislamiento, preparación y mapping, aplicación de extensiones y volumen, sellado, remoción profesional, control final y cuidados domiciliarios.</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="activityScreen" class="activity-screen">
+            <div class="tutor-sidebar">
+                <div class="fede-avatar-large" style="width: 100px; height: 100px; border-color: var(--ficde-naranja);" onclick="replayTutorMessage()">
+                    <img src="personaje.gif" alt="Fede">
+                </div>
+                <div style="flex:1;">
+                    <h3 style="color:var(--ficde-naranja); margin-bottom:5px;">Tutor Fede</h3>
+                    <div class="tutor-bubble" id="tutorMessage"></div>
+                </div>
+            </div>
+
+            <div class="activity-content" id="activityContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===== GESTIÓN DE AUDIO MP3 =====
+        const audioFiles = {
+            saludoInicial: document.getElementById('saludoInicial'),
+            mensaje1: document.getElementById('mensaje1Ejercicios'),
+            mensaje2: document.getElementById('mensaje2Ejercicios'),
+            mensaje3: document.getElementById('mensaje3Ejercicios'),
+            mensaje4: document.getElementById('mensaje4Ejercicios'),
+            correcto: document.getElementById('respuestaCorrecta'),
+            error1: document.getElementById('primerError'),
+            error2: document.getElementById('segundoError'),
+            lolograste: document.getElementById('loLograste')
+        };
+
+        function playAudio(audioKey) {
+            if (audioFiles[audioKey]) {
+                audioFiles[audioKey].currentTime = 0;
+                audioFiles[audioKey].play().catch(err => console.log('Error al reproducir audio:', err));
+            }
+        }
+
+        const bgMusic = document.getElementById('bgMusic');
+        const clickSoundEl = document.getElementById('clickSound');
+        const successSoundEl = document.getElementById('successSound');
+        const hoverSoundEl = document.getElementById('hoverSound');
+
+        let musicOn = false;
+        let audioUnlocked = false;
+
+        function unlockAudio() {
+            if (audioUnlocked) return;
+            Object.values(audioFiles).forEach(a => {
+                a.volume = 0;
+                const p = a.play();
+                if (p) p.then(() => { a.pause(); a.currentTime = 0; a.volume = 1; }).catch(()=>{});
+            });
+            audioUnlocked = true;
+        }
+
+        document.addEventListener('pointerdown', unlockAudio, { once: true });
+        document.addEventListener('keydown', unlockAudio, { once: true });
+
+        function toggleMusic() {
+            unlockAudio();
+            if (!musicOn) {
+                bgMusic.volume = 0.1;
+                bgMusic.play().catch(() => {});
+                document.getElementById('musicToggle').innerText = '🎵';
+            } else {
+                bgMusic.pause();
+                document.getElementById('musicToggle').innerText = '🔇';
+            }
+            musicOn = !musicOn;
+        }
+
+        function playSound(type) {
+            if (!audioUnlocked) return;
+            try {
+                if (type === 'click') { clickSoundEl.currentTime=0; clickSoundEl.volume=0.8; clickSoundEl.play().catch(()=>{}); }
+                if (type === 'success') { successSoundEl.currentTime=0; successSoundEl.volume=0.8; successSoundEl.play().catch(()=>{}); }
+                if (type === 'hover') { hoverSoundEl.currentTime=0; hoverSoundEl.volume=0.2; hoverSoundEl.play().catch(()=>{}); }
+            } catch (e) {}
+        }
+
+        function wireUiSounds() {
+            document.querySelectorAll('.block-card, .btn-action, .checklist-item, .traffic-row, .fede-avatar-large').forEach(el => {
+                if (el.dataset.sound === '1') return;
+                el.dataset.sound = '1';
+                el.addEventListener('mouseenter', () => playSound('hover'));
+                el.addEventListener('click', () => playSound('click'));
+            });
+        }
+
+        window.addEventListener('load', wireUiSounds);
+
+        // ===== NORMALIZACIÓN DE TEXTO =====
+        function normalizar(txt) {
+            return txt.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        // ===== ACTIVIDADES =====
+        const modules = {
+            sintesis: [
+                {
+                    type: 'text',
+                    badge: "Bioseguridad ocular",
+                    title: "Higiene de manos y superficie",
+                    instruction: "Define el procedimiento de higiene de manos antes y después de atender al cliente en el servicio de lashing.",
+                    tutor: "Considera cómo la limpieza de manos previene la transferencia de gérmenes al área ocular del paciente.",
+                    explanation: "Aplicar una adecuada higiene de manos reduce la presencia de microorganismos asegurando la desinfección del entorno de trabajo.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["higien", "microo", "desinf", "aplica", "adecua", "manos", "reduce", "presen", "asegur", "entorn"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'text',
+                    badge: "Anatomía ocular",
+                    title: "Glándulas del párpado",
+                    instruction: "Clasifica la función protectora que cumplen las glándulas de Meibomio en la lubricación de la superficie ocular.",
+                    tutor: "Analiza la producción de lípidos grasos que estabilizan la lágrima y previenen afecciones como el orzuelo.",
+                    explanation: "Las glándulas de Meibomio generan una secreción grasa que mantiene estable la película lagrimal.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["meibom", "secrec", "pelicu", "glandu", "genera", "grasa", "mantie", "establ", "lagrim", "clasif"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Biología capilar",
+                    title: "Fases del ciclo natural",
+                    instruction: "Selecciona las tres fases consecutivas que componen el ciclo biológico de crecimiento de la pestaña natural.",
+                    items: [
+                        { text: "Fase anágena o de crecimiento activo", correct: true },
+                        { text: "Fase catágena o de transición folicular", correct: true },
+                        { text: "Fase telógena o de reposo y desprendimiento", correct: true },
+                        { text: "Fase queratínica de endurecimiento permanente", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Identifica la etapa donde el pelo nace, el período en que se detiene y el momento final de caída.",
+                    explanation: "El ciclo abarca la etapa anágena de crecimiento, la fase catágena de transición y el período telógena de desprendimiento."
+                },
+                {
+                    type: 'text',
+                    badge: "Preparación del área",
+                    title: "Limpieza de la pestaña natural",
+                    instruction: "Detalla los requisitos higiénicos que debe presentar la zona periocular antes de colocar las extensiones.",
+                    tutor: "Observa la necesidad de remover restos de maquillaje, grasa y secreciones cosméticas mediante productos suaves.",
+                    explanation: "Eliminar todas las impurezas y restos de grasitud en la zona optimiza la adherencia del adhesivo.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["impure", "grasit", "adhere", "elimin", "restos", "zona", "optimi", "adhesi", "detall", "requis"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'blanks',
+                    anyOrder: false,
+                    badge: "Instrumental profesional",
+                    title: "Manejo de herramientas",
+                    instruction: "Completar la frase<br><br>Las pinzas de aislamiento y aplicación son herramientas _____________ que requieren desinfección, mientras que los microcepillos son insumos ____________ de uso único.",
+                    blanks: ["reutilizables", "descartables"],
+                    tutor: "Distingue entre los elementos metálicos acondicionados para cada cliente y los materiales que se desechan de inmediato.",
+                    explanation: "Desinfectar el instrumental reutilizable y desechar los elementos descartables resguarda la bioseguridad del servicio."
+                },
+                {
+                    type: 'text',
+                    badge: "Productos de aplicación",
+                    title: "Función del primer y adhesivo",
+                    instruction: "Expone las propiedades del primer de preparación y del adhesivo a base de cianoacrilato en el servicio.",
+                    tutor: "Agrupa el producto que acondiciona la fibra con el agente químico responsable de la fijación rápida.",
+                    explanation: "Utilizar primer prepara la fibra para que el cianoacrilato logre una rápida polimerización y fijación.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["primer", "cianoa", "polime", "utiliz", "prepar", "fibra", "logre", "rapida", "fijaci", "expone"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Tipología de fibras",
+                    title: "Parámetros de selección",
+                    instruction: "Identifica los tres parámetros físicos que caracterizan a las extensiones presentadas en blísteres profesionales.",
+                    items: [
+                        { text: "Longitud en milímetros de la fibra", correct: true },
+                        { text: "Grosor y diámetro del filamento", correct: true },
+                        { text: "Curvatura de la extensión J B C D", correct: true },
+                        { text: "Coloración sintética fluorescente de prueba", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Considera las variables dimensionales que se adaptan a la capacidad de soporte de la pestaña natural.",
+                    explanation: "Evaluar la longitud, el grosor del filamento y la curvatura permite seleccionar la extensión adecuada."
+                },
+                {
+                    type: 'text',
+                    badge: "Técnica clásica",
+                    title: "Colocación pelo por pelo",
+                    instruction: "Describe la técnica tradicional de aplicación de extensiones individuales respetando el aislamiento.",
+                    tutor: "Contempla la adhesión de una única fibra sintética sobre cada pestaña natural previamente separada.",
+                    explanation: "La técnica clásica exige un perfecto aislamiento individual para garantizar la unión de una sola extensión.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["clasic", "aislam", "union", "tecnic", "exige", "perfec", "indivi", "garant", "sola", "extens"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'traffic',
+                    badge: "Distancia de seguridad",
+                    title: "Posicionamiento respecto al párpado",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "La extensión debe adherirse manteniendo una distancia de 1 mm respecto a la base del párpado", color: "green" },
+                        { text: "Aplicar el adhesivo en contacto directo sobre la piel de la raíz favorece la retención prolongada", color: "red" },
+                        { text: "Respetar la distancia de seguridad evita obstrucciones en los folículos y molestias oculares", color: "green" },
+                        { text: "Colocar la fibra a 5 mm de la base es la técnica estándar para iniciar cualquier procedimiento", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Contrasta el margen de 1 mm de la raíz con los riesgos de adherir productos sobre la piel palpebral.",
+                    explanation: "Mantener 1 mm de distancia evita el contacto con el párpado garantizando un recambio saludable."
+                },
+                {
+                    type: 'text',
+                    badge: "Planificación del trabajo",
+                    title: "Concepto de mapping",
+                    instruction: "Sintetiza el objetivo fundamental del mapping como mapa de trabajo dibujado sobre el parche inferior.",
+                    tutor: "Considera la división por sectores de la línea de pestañas para guiar las longitudes en ambos ojos.",
+                    explanation: "Trazar el mapping organiza la distribución de longitudes para lograr una perfecta simetría estética.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["mappin", "distri", "simetr", "trazar", "organi", "longit", "lograr", "perfec", "esteti", "sintet"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                }
+            ],
+            analisis: [
+                {
+                    type: 'text',
+                    badge: "Errores de carga",
+                    title: "Sobrecarga en fase anágena",
+                    instruction: "Examina los daños foliculares provocados al colocar extensiones pesadas sobre pestañas jóvenes en crecimiento.",
+                    tutor: "Reflexiona sobre la fragilidad del pelo en desarrollo y cómo el peso excesivo acelera su desprendimiento prematuro.",
+                    explanation: "Sobrecargar una pestaña anágena provoca la sobrecarga de la raíz causando la caída anticipada del pelo.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["anagen", "sobrec", "caida", "pestan", "provoc", "raiz", "causan", "antici", "pelo", "examin"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'text',
+                    badge: "Fallas de posición",
+                    title: "Adhesión sobre la piel",
+                    instruction: "Evalúa las complicaciones dermatológicas y oculares si el adhesivo toca la superficie del párpado.",
+                    tutor: "Analiza la obturación de los poros y la aparición de irritaciones severas por falta de margen de seguridad.",
+                    explanation: "El contacto del químico con la piel causa inflamación e interrumpe la respiración del folículo.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["contac", "inflam", "folicu", "quimic", "piel", "causa", "interr", "respir", "evalua", "compli"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Errores de aislamiento",
+                    title: "Adherencias indeseadas",
+                    instruction: "Escoge los problemas operativos que derivan de no aislar correctamente la pestaña natural antes de pegar.",
+                    items: [
+                        { text: "Adherencia accidental entre dos o más pestañas naturales", correct: true },
+                        { text: "Tracción dolorosa al crecer pestañas en distintas fases", correct: true },
+                        { text: "Interrupción del ciclo natural de renovación capilar", correct: true },
+                        { text: "Aumento automático de la humedad del adhesivo", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Busca las consecuencias de unir pelos vecinos que se encuentran en diferentes momentos de su crecimiento.",
+                    explanation: "Generar adherencias produce tracción dolorosa y altera el ciclo natural de crecimiento."
+                },
+                {
+                    type: 'text',
+                    badge: "Alteraciones oculares",
+                    title: "Omisión de contraindicaciones",
+                    instruction: "Explica el peligro de realizar el servicio ante la presencia visible de orzuelos, chalaziones o secreciones.",
+                    tutor: "Contesta qué debe hacer el profesional frente a cuadros inflamatorios o infecciosos en el borde palpebral.",
+                    explanation: "Identificar una contraindicación médica evita agravar una infección exigiendo la suspensión inmediata del servicio.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["contra", "infecc", "suspen", "identi", "medica", "evita", "agrava", "exigie", "inmedi", "servic"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'blanks',
+                    anyOrder: false,
+                    badge: "Comportamiento químico",
+                    title: "Factores ambientales del adhesivo",
+                    instruction: "Completar la frase<br><br>Una humedad ambiental excesiva acelera la ______________ del adhesivo perdiendo viscosidad, mientras que un ambiente muy seco retrasa el ______ del cianoacrilato.",
+                    blanks: ["polimerización", "curado"],
+                    tutor: "Recuerda cómo las variaciones de temperatura y humedad alteran los tiempos de secado de la gota.",
+                    explanation: "Monitorear la humedad previene la polimerización precoz del adhesivo garantizando un curado estable."
+                },
+                {
+                    type: 'text',
+                    badge: "Degradación de retención",
+                    title: "Uso de productos oleosos",
+                    instruction: "Juzga las consecuencias de aplicar desmaquillantes con base de aceite sobre las extensiones de pestañas.",
+                    tutor: "Observa cómo los lípidos disuelven la estructura química del cianoacrilato aflojando la unión.",
+                    explanation: "Los aceites provocan la degradación del enlace adhesivo acelerando el desprendimiento de la fibra.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["aceite", "degrad", "despre", "provoc", "enlace", "adhesi", "aceler", "fibra", "juzga", "consec"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Malas prácticas",
+                    title: "Retiro por tracción manual",
+                    instruction: "Señala los daños estructurales que sufre el párpado cuando el cliente arranca o tira de las extensiones.",
+                    items: [
+                        { text: "Pérdida o arrancamiento del folículo natural", correct: true },
+                        { text: "Microtraumatismos en el borde palpebral", correct: true },
+                        { text: "Generación de zonas despobladas o calvas", correct: true },
+                        { text: "Fortalecimiento de la raíz capilar natural", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Localiza los efectos de forzar la separación mecánica sin utilizar la crema o gel removedor específico.",
+                    explanation: "La tracción mecánica causa la pérdida del folículo produciendo zonas despobladas permanentes."
+                },
+                {
+                    type: 'text',
+                    badge: "Exceso de volumen",
+                    title: "Peso inadecuado en abanicos",
+                    instruction: "Argumenta por qué aplicar abanicos de volumen denso sobre pestañas delgadas perjudica la salud ocular.",
+                    tutor: "Analiza la relación entre el grosor de la fibra sintética y la capacidad de resistencia del pelo receptor.",
+                    explanation: "Un volumen desproporcionado genera sobrepeso en la fibra causando el debilitamiento de la raíz.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["volume", "sobrep", "debili", "despro", "genera", "fibra", "causan", "raiz", "argume", "aplica"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'traffic',
+                    badge: "Mantenimiento inadecuado",
+                    title: "Falta de higiene posterior",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "Omitir el lavado diario de las extensiones acumula grasitud y favorece la proliferación bacteriana", color: "green" },
+                        { text: "Lavar las extensiones con espuma específica reduce la duración del adhesivo y degrada la fibra", color: "red" },
+                        { text: "Peinar las pestañas secas con cepillo spoolie evita que se enreden o crucen entre sí", color: "green" },
+                        { text: "Es recomendable frotar vigorosamente los ojos con una toalla para secar el exceso de agua", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Asocia la limpieza diaria con la prevención de blefaritis y la conservación de las extensiones.",
+                    explanation: "La falta de higiene acumula secreciones afectando la salud y la retención del trabajo."
+                },
+                {
+                    type: 'text',
+                    badge: "Fallas en remoción",
+                    title: "Contacto de removedor con el ojo",
+                    instruction: "Sopesa los riesgos de manipular el removedor químico cerca de la mucosa ocular durante el retiro profesional.",
+                    tutor: "Considera el alto poder solvente del producto y la necesidad de mantener el ojo completamente cerrado.",
+                    explanation: "La filtración de removedor hacia la mucosa genera irritación grave y riesgo de quemadura química.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["remove", "mucosa", "quemad", "filtra", "genera", "irrita", "grave", "riesgo", "quimic", "sopesa"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                }
+            ],
+            escenarios: [
+                {
+                    type: 'text',
+                    badge: "Sensibilidad ocular",
+                    title: "Cliente con tendencia a ojo seco",
+                    instruction: "Plantea las precauciones que debe adoptar la lashista al atender a una cliente con diagnóstico de ojo seco.",
+                    tutor: "Contempla el uso de cintas hipoalergénicas, aireación suave de vapores y control de la gota de adhesivo.",
+                    explanation: "Controlar la humedad ambiental y la ventilación disminuye la molestia en ojos con poca lubricación.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["humeda", "aislam", "ventil", "contro", "ambien", "dismin", "molest", "ojos", "poca", "lubric"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'traffic',
+                    badge: "Evaluación inicial",
+                    title: "Pestañas naturales finas",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "En pestañas naturales muy finas se deben seleccionar fibras de grosor reducido como 0.05 o 0.07 mm", color: "green" },
+                        { text: "Es adecuado aplicar un volumen 5D pesado sobre pelos delgados para lograr densidad inmediata", color: "red" },
+                        { text: "Las fibras Flat son una excelente alternativa para aportar volumen visual reduciendo la carga de peso", color: "green" },
+                        { text: "La longitud de la extensión debe superar en más del doble a la pestaña natural receptora", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Observa cómo las fibras livianas y las opciones Flat protegen la pestaña débil sin resignar diseño.",
+                    explanation: "Seleccionar grosores livianos o fibras Flat preserva la salud capilar sin generar sobrecarga."
+                },
+                {
+                    type: 'text',
+                    badge: "Morfología palpebral",
+                    title: "Parche para párpado encapotado",
+                    instruction: "Diseña una estrategia de aislamiento y estiramiento suave para trabajar en clientes con párpados caídos.",
+                    tutor: "Considera el uso de cinta médica para elevar ligeramente el pliegue sin abrir la hendidura palpebral.",
+                    explanation: "Realizar un sutil estiramiento con cinta despeja la raíz en el párpado encapotado sin abrir el ojo.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["encapo", "estira", "cinta", "realiz", "sutil", "despej", "raiz", "parpad", "abrir", "disena"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Reacción intraprocedimiento",
+                    title: "Lagrimeo intenso durante la aplicación",
+                    instruction: "Puntualiza los tres pasos inmediatos que debe ejecutar la profesional si el ojo del cliente comienza a lagrimear.",
+                    items: [
+                        { text: "Interrumpir momentáneamente la aplicación de extensiones", correct: true },
+                        { text: "Secar las lágrimas en la zona del parche sin tocar la raíz", correct: true },
+                        { text: "Verificar que el parche inferior no esté lastimando la esclerótica", correct: true },
+                        { text: "Soplar fuertemente con la boca directamente sobre el ojo abierto", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Aplica la pausa de seguridad, secado suave del flujo salino y reacomodamiento del aislamiento.",
+                    explanation: "La pausa, la reubicación del parche y el secado de la lágrima evitan que la humedad cristalice el pegamento."
+                },
+                {
+                    type: 'text',
+                    badge: "Usuarios de lentes",
+                    title: "Adaptación de curvatura",
+                    instruction: "Ilustra la selección de la curvatura y longitud adecuada para una cliente que utiliza anteojos o lentes de contacto.",
+                    tutor: "Analiza cómo evitar que las puntas de las extensiones rocen contra los vidrios mediante curvaturas C o D.",
+                    explanation: "Acentuar la curvatura de la fibra previene el roce molesto de la extensión con los cristales.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["curvat", "roce", "crista", "acentu", "fibra", "previe", "molest", "extens", "ilustr", "selecc"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'traffic',
+                    badge: "Corrección visual",
+                    title: "Ojos asimétricos",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "El mapping permite compensar asimetrías palpebrales variando las longitudes en sectores estratégicos", color: "green" },
+                        { text: "Debe aplicarse exactamente el mismo esquema rígido en ambos ojos sin importar la diferencia de tamaño", color: "red" },
+                        { text: "Utilizar curvaturas más abiertas en el ojo más pequeño ayuda a equilibrar la mirada", color: "green" },
+                        { text: "Las asimetrías naturales se corrigen únicamente duplicando la cantidad de adhesivo en un ojo", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Analiza cómo la personalización del diseño compensa las diferencias anatómicas entre ambos ojos.",
+                    explanation: "Adaptar el mapping y las curvaturas en cada ojo armoniza la simetría general del rostro."
+                },
+                {
+                    type: 'text',
+                    badge: "Retoque periódico",
+                    title: "Mantenimiento a los 18 días",
+                    instruction: "Desglosa el procedimiento a realizar en una sesión de service cuando el cliente conserva un 45% de extensiones.",
+                    tutor: "Detalla la limpieza, el retiro de fibras crecidas o torcidas y la colocación de nuevas extensiones.",
+                    explanation: "En el service se efectúa la remoción de fibras desalineadas y el reemplazo en espacios vacíos.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["servic", "remoci", "reempl", "efectu", "fibras", "desali", "espaci", "vacios", "desglo", "proced"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Detección de patología",
+                    title: "Presencia de conjuntivitis",
+                    instruction: "Reúne las acciones éticas y de bioseguridad que corresponden si el cliente se presenta con enrojecimiento y secreción.",
+                    items: [
+                        { text: "Suspender la realización del servicio de inmediato", correct: true },
+                        { text: "Explicar al cliente la importancia de consultar con un oftalmólogo", correct: true },
+                        { text: "Desinfectar las herramientas que hayan tenido contacto con el área", correct: true },
+                        { text: "Aplicar gotas antibióticas de venta libre directamente en la camilla", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Busca las medidas de protección personal, derivación médica e higiene de la cabina de trabajo.",
+                    explanation: "Proceder a suspender la atención, derivar al médico y realizar la desinfección cuida la bioseguridad."
+                },
+                {
+                    type: 'text',
+                    badge: "Cuidados de verano",
+                    title: "Exposición a calor y piscinas",
+                    instruction: "Expón las indicaciones especiales de cuidado para clientes que realizan actividades acuáticas o van a la playa.",
+                    tutor: "Considera el enjuague con agua dulce tras la piscina, el secado sin frotar y el peinado delicado.",
+                    explanation: "Retirar el cloro con agua limpia, realizar un suave secado y mantener el cepillado protege la retención.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["cloro", "secado", "cepill", "retira", "agua", "limpia", "realiz", "suave", "manten", "proteg"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'traffic',
+                    badge: "Retiro de emergencia",
+                    title: "Remoción de trabajo mal realizado",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "Si una cliente llega con extensiones pegadas en bloque se debe realizar una remoción química completa", color: "green" },
+                        { text: "Es correcto utilizar pinzas para cortar o separar los bloques de pegamento a la fuerza", color: "red" },
+                        { text: "Aplicar removedor en crema disuelve las acumulaciones gruesas de cianoacrilato de forma segura", color: "green" },
+                        { text: "Tras una remoción de emergencia se deben colocar inmediatamente extensiones más pesadas", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Asocia la disolución química controlada con la preservación del pelo natural maltrecho.",
+                    explanation: "Aplicar removedor en crema disuelve los excesos sin recurrir a la tracción protegiendo la raíz."
+                }
+            ],
+            practica: [
+                {
+                    type: 'checklist',
+                    badge: "Aislamiento inicial",
+                    title: "Colocación del parche inferior",
+                    instruction: "Elige los tres pasos clave para posicionar correctamente el parche hidrogel sobre las pestañas inferiores.",
+                    items: [
+                        { text: "Solicitar al cliente que mire hacia arriba para despejar la zona", correct: true },
+                        { text: "Cubrir totalmente la línea de pestañas inferiores sin tocar la mucosa", correct: true },
+                        { text: "Verificar que el borde superior no roce la córnea ni la esclerótica", correct: true },
+                        { text: "Pegar el parche directamente sobre el ojo abierto presionando el globo", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Enfócate en la técnica de colocación, la protección de pelos inferiores y el margen del globo ocular.",
+                    explanation: "Solicitar mirar hacia arriba, cubrir las pestañas inferiores y cuidar el margen del ojo evita roces."
+                },
+                {
+                    type: 'text',
+                    badge: "Preparación química",
+                    title: "Aplicación de primer",
+                    instruction: "Instruye paso a paso la forma correcta de extender el primer sobre las pestañas usando microhisopos.",
+                    tutor: "Detalla el uso de dos aplicadores sosteniendo la pestaña de base a puntas sin saturar de líquido.",
+                    explanation: "Aplicar el primer mediante microhisopo de la base a las puntas asegura el secado antes de pegar.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["primer", "microh", "secado", "aplica", "median", "base", "puntas", "asegur", "antes", "pegar"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'blanks',
+                    anyOrder: false,
+                    badge: "Diseño en cabina",
+                    title: "Trazado del mapping",
+                    instruction: "Completar la frase<br><br>Sobre el parche inferior se utiliza un marcador para trazar las líneas de ________ y anotar los milímetros de ________ asignados a cada sector.",
+                    blanks: ["división", "longitud"],
+                    tutor: "Piensa en la demarcación de zonas en la línea del párpado y los números que identifican el tamaño de la fibra.",
+                    explanation: "Trazar el mapping marcando las líneas de división y anotando la longitud guía la aplicación."
+                },
+                {
+                    type: 'traffic',
+                    badge: "Técnica de acoplamiento",
+                    title: "Adhesión precisa a 1 mm",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "La extensión debe sumergirse verticalmente en el centro de la gota de adhesivo", color: "green" },
+                        { text: "Es necesario raspar la fibra contra el parche para retirar todo el exceso de pegamento", color: "red" },
+                        { text: "La base de la extensión debe acoplarse paralelamente a 1 mm del párpado sobre la pestaña aislada", color: "green" },
+                        { text: "La fibra debe colocarse en ángulo cruzado de 45° respecto al crecimiento natural", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Revisa la toma de adhesivo, la distancia de seguridad y la alineación en ángulo de 90°.",
+                    explanation: "La toma correcta de adhesivo y el acoplamiento a 1 mm logran una fijación duradera."
+                },
+                {
+                    type: 'text',
+                    badge: "Técnica de volumen",
+                    title: "Armado de abanicos manuales",
+                    instruction: "Prescribe el procedimiento para confeccionar un abanico 3D utilizando la pinza de volumen.",
+                    tutor: "Pauta el pellizco o apertura de tres fibras delgadas manteniendo la base unida en una sola punta.",
+                    explanation: "Tomar las tres fibras con la pinza, abrir el abanico y mantener la simetría crea densidad.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["abanic", "pinza", "simetr", "tomar", "tres", "fibras", "abrir", "manten", "crea", "densid"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Sellado final",
+                    title: "Aplicación de blonder",
+                    instruction: "Determina la secuencia correcta para utilizar el producto sellador o blonder al terminar el servicio.",
+                    items: [
+                        { text: "Esperar dos minutos tras colocar la última extensión", correct: true },
+                        { text: "Humedecer un microhisopo con una pequeña gota de blonder", correct: true },
+                        { text: "Pasar el microhisopo suavemente sobre las zonas de unión adhesiva", correct: true },
+                        { text: "Volcar el frasco de blonder directamente sobre el párpado abierto", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Agrupa la pausa posterior al pegado, la dosificación controlada y el sellado de los puntos de unión.",
+                    explanation: "Aplicar el blonder con microhisopo sobre la unión acelera el secado del pegamento."
+                },
+                {
+                    type: 'text',
+                    badge: "Retiro profesional",
+                    title: "Técnica de remoción con crema",
+                    instruction: "Guía los pasos operativos para retirar un set completo de extensiones mediante removedor en crema.",
+                    tutor: "Ordena la aplicación de la crema sobre las uniones, el tiempo de espera y el deslizamiento con microhisopo.",
+                    explanation: "Colocar removedor en crema, respetar el tiempo de exposición y realizar la limpieza retira las fibras.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["remove", "exposi", "limpie", "coloca", "crema", "respet", "tiempo", "realiz", "retira", "fibras"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'traffic',
+                    badge: "Control de calidad",
+                    title: "Verificación de adherencias cruzadas",
+                    instruction: "Marca afirmaciones correctas",
+                    items: [
+                        { text: "Al finalizar se debe pasar la pinza punto por punto comprobando que no existan pestañas pegadas entre sí", color: "green" },
+                        { text: "Si dos pestañas quedaron unidas con adhesivo es correcto dejarlas así para no perder tiempo", color: "red" },
+                        { text: "Separar suavemente las adherencias accidentales con dos pinzas protege la salud del folículo", color: "green" },
+                        { text: "La revisión final se realiza únicamente con el ojo del cliente abierto y pestañeando", color: "red" }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Analiza el control minucioso de independencia de cada fibra antes de retirar los parches.",
+                    explanation: "La verificación individual detecta adherencias permitiendo la separación segura de fibras."
+                },
+                {
+                    type: 'text',
+                    badge: "Acabado estético",
+                    title: "Peinado y retirada de parche",
+                    instruction: "Pauta el cierre del procedimiento retirando el parche inferior y ordenando las extensiones con el spoolie.",
+                    tutor: "Indica la remoción suave del aislamiento inferior desde el borde externo y el cepillado seco.",
+                    explanation: "Realizar el retiro delicado del parche y peinar suavemente con el spoolie perfecciona la mirada.",
+                    validation: (raw) => {
+                        const v = normalizar(raw);
+                        const roots = ["parche", "retiro", "spooli", "realiz", "delica", "peinar", "suavem", "perfec", "mirada", "pauta"];
+                        return roots.filter(r => v.includes(r)).length >= 2;
+                    }
+                },
+                {
+                    type: 'checklist',
+                    badge: "Asesoramiento final",
+                    title: "Entrega de indicaciones de cuidado",
+                    instruction: "Compila las recomendaciones verbales y escritas que deben entregarse al cliente antes de retirarse.",
+                    items: [
+                        { text: "Explicar la restricción de agua y vapor durante las primeras 24 horas", correct: true },
+                        { text: "Entregar un cepillo spoolie limpio para el peinado diario en hogar", correct: true },
+                        { text: "Indicar el lavado diario con mousse higienizante especial para pestañas", correct: true },
+                        { text: "Recomendar el uso de arqueador metálico calentado todas las mañanas", correct: false }
+                    ].sort(() => Math.random() - 0.5),
+                    tutor: "Busca las pautas de reposo del pegamento, la herramienta de cepillado individual y la higiene domiciliaria.",
+                    explanation: "Informar la restricción de 24 horas, regalar el spoolie y pautar el lavado garantiza la retención."
+                }
+            ]
+        };
+
+let currentModule = '';
+        let currentIndex = 0;
+        let attemptCount = 0;
+        let lastAudioModule = null;
+
+        // ===== MAPEO DE MÓDULOS A AUDIOS =====
+        const moduloAudioMap = {
+            'sintesis': 'mensaje1',
+            'analisis': 'mensaje2',
+            'escenarios': 'mensaje3',
+            'practica': 'mensaje4'
+        };
+
+        function startModule(id) {
+            playSound('click');
+            currentModule = id;
+            currentIndex = 0;
+            attemptCount = 0;
+            lastAudioModule = id;
+
+            // Reproducir el audio del módulo correspondiente
+            const audioKey = moduloAudioMap[id];
+            if (audioKey) {
+                playAudio(audioKey);
+            }
+
+            document.getElementById('selectionScreen').style.display = 'none';
+            document.getElementById('activityScreen').classList.add('active');
+
+            setTimeout(loadActivity, 300);
+        }
+
+        function loadActivity() {
+            attemptCount = 0;
+
+            if (currentIndex >= modules[currentModule].length) {
+                // Reproducir "lolograste.mp3" al terminar TODAS las preguntas
+                playAudio('lolograste');
+                playSound('success');
+                alert('¡Excelente! Completaste este bloque.');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+                return;
+            }
+
+            const data = modules[currentModule][currentIndex];
+            const container = document.getElementById('activityContainer');
+
+            const msg = `Pregunta ${currentIndex + 1} de ${modules[currentModule].length}: ${data.tutor}`;
+            document.getElementById('tutorMessage').innerText = msg;
+
+            let html = `<span class="act-badge">${data.badge}</span>
+                        <h2 class="act-title">${data.title}</h2>
+                        <p class="act-instruction">${data.instruction}</p>`;
+
+            if (data.type === 'text') {
+                html += `<textarea id="txtInput" class="student-input" placeholder="Escribe tu respuesta con tus palabras..."></textarea>`;
+            } else if (data.type === 'blanks') {
+                html += `<div style="font-size:1.2rem; line-height:2.5;">`;
+                data.blanks.forEach((b, i) => {
+                    html += `${i + 1}. <input type="text" class="fill-input" data-ans="${b}"> <br>`;
+                });
+                html += `</div>`;
+            } else if (data.type === 'traffic') {
+                data.items.forEach((item, i) => {
+                    html += `<div class="traffic-row" id="row-${i}">
+                                <span>${item.text}</span>
+                                <div style="display:flex; gap:10px;">
+                                    <div class="traffic-btn bg-green" onclick="selTraffic(${i}, 'green')"></div>
+                                    <div class="traffic-btn bg-yellow" onclick="selTraffic(${i}, 'yellow')"></div>
+                                    <div class="traffic-btn bg-red" onclick="selTraffic(${i}, 'red')"></div>
+                                </div>
+                            </div>`;
+                });
+            } else if (data.type === 'checklist') {
+                data.items.forEach((item) => {
+                    html += `<div class="checklist-item" onclick="toggleCheck(this)" data-correct="${item.correct}">
+                                <div class="check-box"></div>
+                                <span>${item.text}</span>
+                            </div>`;
+                });
+            }
+
+            html += `<div id="feedback" class="feedback-area"></div>
+                     <button id="btnCheck" class="btn-action" onclick="validate()">Verificar respuesta</button>
+                     <button class="btn-action btn-back" onclick="location.reload()">Salir al menú</button>`;
+
+            container.innerHTML = html;
+            wireUiSounds();
+        }
+
+        let trafficAns = {};
+
+        function selTraffic(idx, color) {
+            trafficAns[idx] = color;
+            const row = document.getElementById(`row-${idx}`);
+            row.querySelectorAll('.traffic-btn').forEach(b => b.classList.remove('active'));
+            row.querySelector(`.bg-${color}`).classList.add('active');
+            playSound('click');
+        }
+
+        function toggleCheck(el) {
+            el.classList.toggle('selected');
+            el.querySelector('.check-box').innerText = el.classList.contains('selected') ? '✓' : '';
+
+            if (el.classList.contains('selected')) {
+                el.style.borderColor = 'var(--ficde-naranja)';
+                el.querySelector('.check-box').style.background = 'var(--ficde-naranja)';
+                el.querySelector('.check-box').style.borderColor = 'var(--ficde-naranja)';
+                el.querySelector('.check-box').style.color = 'white';
+            } else {
+                el.style.borderColor = 'transparent';
+                el.querySelector('.check-box').style.background = 'transparent';
+                el.querySelector('.check-box').style.borderColor = '#ccc';
+            }
+
+            playSound('click');
+        }
+
+        function validate() {
+            const data = modules[currentModule][currentIndex];
+            const feedback = document.getElementById('feedback');
+            let isCorrect = false;
+
+            if (data.type === 'text') {
+                const val = document.getElementById('txtInput').value;
+                isCorrect = data.validation(val);
+            } else if (data.type === 'blanks') {
+                const inputs = document.querySelectorAll('.fill-input');
+                let hits = 0;
+                let usedAnswers = [];
+                inputs.forEach(inp => {
+                    const v = normalizar(inp.value.trim());
+                    if (v.length > 0) {
+                        if (data.anyOrder) {
+                            const matchedIdx = data.blanks.findIndex((ans, idx) => {
+                                if (usedAnswers.includes(idx)) return false;
+                                const normAns = normalizar(ans.trim());
+                                return (normAns === v || (v.length > 1 && normAns.startsWith(v.slice(0, Math.max(2, Math.min(v.length, normAns.length))))));
+                            });
+                            if (matchedIdx !== -1) {
+                                hits++;
+                                usedAnswers.push(matchedIdx);
+                            }
+                        } else {
+                            const ans = normalizar(inp.dataset.ans.trim());
+                            if (ans === v || (v.length > 1 && ans.startsWith(v.slice(0, Math.max(2, Math.min(v.length, ans.length)))))) {
+                                hits++;
+                            }
+                        }
+                    }
+                });
+                isCorrect = (hits === data.blanks.length);
+            } else if (data.type === 'traffic') {
+                let hits = 0;
+                data.items.forEach((item, i) => { if (trafficAns[i] === item.color) hits++; });
+                isCorrect = (hits === data.items.length);
+            } else if (data.type === 'checklist') {
+                let correct = true;
+                document.querySelectorAll('.checklist-item').forEach(item => {
+                    const sel = item.classList.contains('selected');
+                    const should = item.dataset.correct === 'true';
+                    if (sel !== should) correct = false;
+                });
+                isCorrect = correct;
+            }
+
+            feedback.style.display = 'block';
+
+            if (isCorrect) {
+                playAudio('correcto');
+                playSound('success');
+                feedback.className = 'feedback-area feedback-success';
+                feedback.innerHTML = `<strong>¡Muy bien!</strong><br>${data.explanation}`;
+                document.getElementById('btnCheck').innerText = 'Siguiente pregunta →';
+                document.getElementById('btnCheck').onclick = () => { currentIndex++; loadActivity(); };
+            } else {
+                attemptCount++;
+
+                if (attemptCount < 2) {
+                    playAudio('error1');
+                    feedback.className = 'feedback-area feedback-retry';
+                    feedback.innerHTML = `<strong>Buen intento.</strong> Revisá tu respuesta. Pista: ${data.tutor}`;
+                } else {
+                    playAudio('error2');
+                    feedback.className = 'feedback-area feedback-fail';
+                    feedback.innerHTML = `<strong>No pasa nada, aprendamos juntos:</strong><br>${data.explanation}`;
+                    document.getElementById('btnCheck').innerText = 'Entendido, continuar →';
+                    document.getElementById('btnCheck').onclick = () => { currentIndex++; loadActivity(); };
+                }
+            }
+        }
+
+        function replayTutorMessage() {
+            // Replay del último audio de módulo reproducido
+            if (lastAudioModule) {
+                const audioKey = moduloAudioMap[lastAudioModule];
+                if (audioKey) {
+                    playAudio(audioKey);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
